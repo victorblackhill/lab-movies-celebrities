@@ -1,0 +1,17 @@
+<h1>Celebrities form</h1>
+<form action="/celebrities/create" method="post"  >
+    
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="Input celebrity name here!">
+    
+    <label for="occupation">Occupation</label>
+    <select name="occupation" id="occupation">
+        {{#each occupation}}
+        <option value="{{this}}"> {{this}} </option>
+        {{/each}}
+    </select>
+    
+    <label for="catchPhrase">catchPhrase</label>
+    <input type="text" id="catchPhrase" name="catchPhrase" value="Catch phrase...">
+    <button>Create</button>
+</form>
