@@ -31,9 +31,7 @@ const renderBody = function (req, res, next) {
 const createCelebrity = async function (req, res, next) {
   try {
     const newCelebrity = { ...req.body };
-    console.log("toRender >>>>", newCelebrity,Celebrity);
     const createdCelebrity = await Celebrity.create(req.body);
-    
     console.log("created actor >>>>", createdCelebrity)
     next();
   } catch (err) {
@@ -41,16 +39,21 @@ const createCelebrity = async function (req, res, next) {
   }
 };
 
+const redirectHome = async function (req, res , next){
+  try{
+    res.redirect("/celebrities")
+  }catch(err){
+    console.error(err)
+  }
+}
+
 // List of routes
 
 //these are the parameters to be used in the renders
 const occupation = { occupation: ["actor", "singer", "comedian", "unknown"] };
 
 router.get("/", renderView("celebrities/celebrities.hbs"))
-
 router.get("/create", renderView("celebrities/new-celebrity.hbs", occupation));
-router.post("/create",createCelebrity,
-renderView("celebrities/celebrities.hbs")
-);
+router.post("/create",createCelebrity,redirectHome);
 
 module.exports = router;
